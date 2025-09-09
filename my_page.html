@@ -1,0 +1,624 @@
+{\rtf1\ansi\ansicpg1251\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!DOCTYPE html>\
+<html lang="en">\
+<head>\
+    <meta charset="UTF-8">\
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">\
+    <title>Global Connect | Find Your Study Abroad Mentor</title>\
+    <script src="https://cdn.tailwindcss.com"></script>\
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">\
+    <style>\
+        body \{\
+            font-family: 'Inter', sans-serif;\
+            background-color: #f8fafc; /* Tailwind gray-50 */\
+        \}\
+        .hero-section \{\
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://placehold.co/1600x800/a3e635/ffffff?text=Explore+the+World');\
+            background-size: cover;\
+            background-position: center;\
+        \}\
+        /* Custom scrollbar for better aesthetics */\
+        ::-webkit-scrollbar \{\
+            width: 8px;\
+        \}\
+        ::-webkit-scrollbar-track \{\
+            background: #f1f1f1;\
+        \}\
+        ::-webkit-scrollbar-thumb \{\
+            background: #888;\
+            border-radius: 10px;\
+        \}\
+        ::-webkit-scrollbar-thumb:hover \{\
+            background: #555;\
+        \}\
+    </style>\
+</head>\
+<body>\
+\
+    <!-- Header Navigation -->\
+    <header class="bg-white shadow-md sticky top-0 z-50">\
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">\
+            <a href="#/" class="text-2xl font-bold text-gray-800">\
+                <span class="text-blue-600">Global</span>Connect\
+            </a>\
+            <div class="space-x-4">\
+                <button id="loginBtn" class="px-4 py-2 text-gray-700 font-medium hover:text-blue-600 transition duration-300">Log In</button>\
+                <button id="signupBtn" class="px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition duration-300 shadow-sm">Sign Up</button>\
+            </div>\
+        </nav>\
+    </header>\
+\
+    <!-- Main Content -->\
+    <main>\
+        <!-- Hero Section -->\
+        <section class="hero-section text-white py-20 md:py-32">\
+            <div class="container mx-auto px-6 text-center">\
+                <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">Find Your Perfect Study Abroad Mentor</h1>\
+                <p class="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto">Connect with experienced students who can guide you on your journey to study in a new country.</p>\
+            </div>\
+        </section>\
+\
+        <!-- Filters Section -->\
+        <section id="filters" class="bg-white p-6 rounded-lg shadow-lg container mx-auto -mt-16 relative z-10">\
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">\
+                <div>\
+                    <label for="countryFilter" class="block text-sm font-medium text-gray-700 mb-2">Mentor From:</label>\
+                    <select id="countryFilter" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">\
+                        <option>All Countries</option>\
+                    </select>\
+                </div>\
+                <div>\
+                    <label for="languageFilter" class="block text-sm font-medium text-gray-700 mb-2">Speaks Language:</label>\
+                    <select id="languageFilter" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">\
+                        <option>All Languages</option>\
+                    </select>\
+                </div>\
+                <div>\
+                    <label for="destinationFilter" class="block text-sm font-medium text-gray-700 mb-2">Wants to Study In:</label>\
+                    <select id="destinationFilter" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">\
+                        <option>All Destinations</option>\
+                    </select>\
+                </div>\
+            </div>\
+        </section>\
+\
+\
+        <!-- Dynamic Content Area -->\
+        <div id="app">\
+            <!-- Mentors Grid or Profile Page will be rendered here -->\
+        </div>\
+    </main>\
+    \
+    <!-- Footer -->\
+    <footer class="bg-gray-800 text-white py-8">\
+        <div class="container mx-auto px-6 text-center">\
+            <p>&copy; 2024 GlobalConnect. All rights reserved.</p>\
+            <p class="text-sm text-gray-400 mt-2">Connecting students across the globe.</p>\
+        </div>\
+    </footer>\
+\
+\
+    <!-- Login Modal -->\
+    <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden">\
+        <div class="bg-white rounded-lg shadow-2xl p-8 w-full max-w-md transform transition-all scale-95 opacity-0" id="loginModalContent">\
+            <div class="flex justify-between items-center mb-6">\
+                <h2 class="text-2xl font-bold text-gray-800">Welcome Back!</h2>\
+                <button id="closeLoginModal" class="text-gray-500 hover:text-gray-800 text-3xl">&times;</button>\
+            </div>\
+            <form>\
+                <div class="mb-4">\
+                    <label for="loginEmail" class="block text-gray-700 mb-2">Email Address</label>\
+                    <input type="email" id="loginEmail" placeholder="you@example.com" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">\
+                </div>\
+                <div class="mb-6">\
+                    <label for="loginPassword" class="block text-gray-700 mb-2">Password</label>\
+                    <input type="password" id="loginPassword" placeholder="\'95\'95\'95\'95\'95\'95\'95\'95" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">\
+                </div>\
+                <button type="submit" class="w-full bg-blue-600 text-white p-3 rounded-lg font-semibold hover:bg-blue-700">Log In</button>\
+            </form>\
+        </div>\
+    </div>\
+\
+    <!-- Signup Modal -->\
+    <div id="signupModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden">\
+        <div class="bg-white rounded-lg shadow-2xl p-8 w-full max-w-md transform transition-all scale-95 opacity-0" id="signupModalContent">\
+            <div class="flex justify-between items-center mb-6">\
+                <h2 class="text-2xl font-bold text-gray-800">Join GlobalConnect</h2>\
+                <button id="closeSignupModal" class="text-gray-500 hover:text-gray-800 text-3xl">&times;</button>\
+            </div>\
+            <form>\
+                <div class="mb-4">\
+                    <label for="signupName" class="block text-gray-700 mb-2">Full Name</label>\
+                    <input type="text" id="signupName" placeholder="John Doe" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">\
+                </div>\
+                <div class="mb-4">\
+                    <label for="signupEmail" class="block text-gray-700 mb-2">Email Address</label>\
+                    <input type="email" id="signupEmail" placeholder="you@example.com" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">\
+                </div>\
+                <div class="mb-6">\
+                    <label for="signupPassword" class="block text-gray-700 mb-2">Password</label>\
+                    <input type="password" id="signupPassword" placeholder="\'95\'95\'95\'95\'95\'95\'95\'95" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">\
+                </div>\
+                <button type="submit" class="w-full bg-blue-600 text-white p-3 rounded-lg font-semibold hover:bg-blue-700">Create Account</button>\
+            </form>\
+        </div>\
+    </div>\
+\
+    <!-- HTML Templates for different views -->\
+    <template id="mentor-list-template">\
+        <section class="py-16">\
+            <div class="container mx-auto px-6">\
+                 <h2 id="results-heading" class="text-3xl font-bold text-gray-800 mb-8 text-center">Meet Our Mentors</h2>\
+                <div id="mentor-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">\
+                    <!-- Mentor profiles will be dynamically inserted here -->\
+                </div>\
+                <p id="no-results" class="text-center text-gray-500 mt-12 text-xl hidden">No mentors found matching your criteria. Try adjusting your filters!</p>\
+            </div>\
+        </section>\
+    </template>\
+\
+    <template id="profile-page-template">\
+        <section class="py-12 bg-gray-50">\
+            <div class="container mx-auto px-4">\
+                <button id="back-to-mentors" class="mb-6 inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">\
+                    &larr; Back to Mentors\
+                </button>\
+\
+                <!-- Profile Header -->\
+                <div class="bg-white rounded-lg shadow-lg p-8 md:flex items-center gap-8">\
+                    <img id="profile-img" class="w-32 h-32 rounded-full mx-auto md:mx-0 object-cover" src="" alt="Profile picture">\
+                    <div class="text-center md:text-left mt-4 md:mt-0">\
+                        <h2 id="profile-name" class="text-3xl font-bold text-gray-900"></h2>\
+                        <p id="profile-from" class="text-gray-600"></p>\
+                        <p id="profile-study" class="text-gray-600 mt-1"></p>\
+                    </div>\
+                </div>\
+\
+                <!-- Dashboard Tabs -->\
+                <div class="mt-8">\
+                    <div class="border-b border-gray-200">\
+                        <nav id="profile-tabs" class="-mb-px flex space-x-8" aria-label="Tabs">\
+                           <!-- Tabs will be dynamically generated here -->\
+                        </nav>\
+                    </div>\
+                    <div id="tab-content" class="mt-8">\
+                        <!-- Tab content will be rendered here -->\
+                    </div>\
+                </div>\
+            </div>\
+        </section>\
+    </template>\
+\
+\
+    <script>\
+        document.addEventListener('DOMContentLoaded', () => \{\
+            // --- MOCK DATABASE ---\
+            const db = \{\
+                mentors: [\
+                    \{\
+                        id: 1,\
+                        name: 'Sofia Rossi',\
+                        fromCountry: 'Italy',\
+                        languages: ['Italian', 'English', 'French'],\
+                        studyingIn: 'United States of America',\
+                        university: 'Harvard University',\
+                        major: 'Computer Science',\
+                        img: 'https://placehold.co/200x200/60a5fa/ffffff?text=SR',\
+                        chatHistory: [\
+                            \{ sender: 'student', text: 'Hi Sofia! I am interested in studying in the US. Can you help?' \},\
+                            \{ sender: 'mentor', text: 'Ciao! Absolutely. What specific questions do you have?' \},\
+                        ],\
+                        schedule: \{ '2024-10-15T10:00': 'booked', '2024-10-16T14:00': 'available' \}\
+                    \},\
+                    \{\
+                        id: 2,\
+                        name: 'Kenji Tanaka',\
+                        fromCountry: 'Japan',\
+                        languages: ['Japanese', 'English'],\
+                        studyingIn: 'United Kingdom',\
+                        university: 'University of Oxford',\
+                        major: 'Philosophy, Politics and Economics',\
+                        img: 'https://placehold.co/200x200/f87171/ffffff?text=KT',\
+                        chatHistory: [],\
+                        schedule: \{\}\
+                    \},\
+                    \{\
+                        id: 3,\
+                        name: 'Priya Sharma',\
+                        fromCountry: 'India',\
+                        languages: ['Hindi', 'English', 'German'],\
+                        studyingIn: 'Germany',\
+                        university: 'Technical University of Munich',\
+                        major: 'Mechanical Engineering',\
+                        img: 'https://placehold.co/200x200/fb923c/ffffff?text=PS',\
+                        chatHistory: [],\
+                        schedule: \{\}\
+                    \},\
+                    \{\
+                        id: 4,\
+                        name: 'Carlos Gomez',\
+                        fromCountry: 'Spain',\
+                        languages: ['Spanish', 'English'],\
+                        studyingIn: 'Australia',\
+                        university: 'University of Sydney',\
+                        major: 'Marine Biology',\
+                        img: 'https://placehold.co/200x200/a3e635/ffffff?text=CG',\
+                        chatHistory: [],\
+                        schedule: \{\}\
+                    \},\
+                    \{\
+                        id: 5,\
+                        name: 'Aisha Bello',\
+                        fromCountry: 'Nigeria',\
+                        languages: ['English', 'Yoruba'],\
+                        studyingIn: 'Canada',\
+                        university: 'University of Toronto',\
+                        major: 'Business Administration',\
+                        img: 'https://placehold.co/200x200/4ade80/ffffff?text=AB',\
+                        chatHistory: [],\
+                        schedule: \{\}\
+                    \},\
+                    \{\
+                        id: 6,\
+                        name: 'Lars Andersen',\
+                        fromCountry: 'Denmark',\
+                        languages: ['Danish', 'English'],\
+                        studyingIn: 'Japan',\
+                        university: 'University of Tokyo',\
+                        major: 'Robotics',\
+                        img: 'https://placehold.co/200x200/34d399/ffffff?text=LA',\
+                        chatHistory: [],\
+                        schedule: \{\}\
+                    \},\
+                    \{\
+                        id: 7,\
+                        name: 'Mei Lin',\
+                        fromCountry: 'China',\
+                        languages: ['Chinese', 'English'],\
+                        studyingIn: 'United States of America',\
+                        university: 'Stanford University',\
+                        major: 'Artificial Intelligence',\
+                        img: 'https://placehold.co/200x200/f472b6/ffffff?text=ML',\
+                        chatHistory: [],\
+                        schedule: \{\}\
+                    \},\
+                    \{\
+                        id: 8,\
+                        name: 'Fatima Al-Sayed',\
+                        fromCountry: 'Egypt',\
+                        languages: ['Arabic', 'English', 'French'],\
+                        studyingIn: 'France',\
+                        university: 'Sorbonne University',\
+                        major: 'Art History',\
+                        img: 'https://placehold.co/200x200/c084fc/ffffff?text=FA',\
+                        chatHistory: [],\
+                        schedule: \{\}\
+                    \}\
+                ]\
+            \};\
+            \
+            const worldCountries = ["Afghanistan","Albania","Algeria","Andorra","Angola","Antigua and Barbuda","Argentina","Armenia","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana","Brazil","Brunei","Bulgaria","Burkina Faso","Burundi","Cabo Verde","Cambodia","Cameroon","Canada","Central African Republic","Chad","Chile","China","Colombia","Comoros","Congo, Democratic Republic of the","Congo, Republic of the","Costa Rica","Cote d'Ivoire","Croatia","Cuba","Cyprus","Czechia","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Eswatini","Ethiopia","Fiji","Finland","France","Gabon","Gambia","Georgia","Germany","Ghana","Greece","Grenada","Guatemala","Guinea","Guinea-Bissau","Guyana","Haiti","Honduras","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Israel","Italy","Jamaica","Japan","Jordan","Kazakhstan","Kenya","Kiribati","Kosovo","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Marshall Islands","Mauritania","Mauritius","Mexico","Micronesia","Moldova","Monaco","Mongolia","Montenegro","Morocco","Mozambique","Myanmar","Namibia","Nauru","Nepal","Netherlands","New Zealand","Nicaragua","Niger","Nigeria","North Korea","North Macedonia","Norway","Oman","Pakistan","Palau","Palestine State","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Qatar","Romania","Russia","Rwanda","Saint Kitts and Nevis","Saint Lucia","Saint Vincent and the Grenadines","Samoa","San Marino","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South Korea","South Sudan","Spain","Sri Lanka","Sudan","Suriname","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor-Leste","Togo","Tonga","Trinidad and Tobago","Tunisia","Turkey","Turkmenistan","Tuvalu","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States of America","Uruguay","Uzbekistan","Vanuatu","Vatican City","Venezuela","Vietnam","Yemen","Zambia","Zimbabwe"];\
+\
+            const worldLanguages = ["Afar","Abkhazian","Avestan","Afrikaans","Akan","Amharic","Aragonese","Arabic","Assamese","Avaric","Aymara","Azerbaijani","Bashkir","Belarusian","Bulgarian","Bihari languages","Bislama","Bambara","Bengali","Tibetan","Breton","Bosnian","Catalan","Chechen","Chamorro","Corsican","Cree","Czech","Church Slavic","Chuvash","Welsh","Danish","German","Divehi","Dzongkha","Ewe","Greek","English","Esperanto","Spanish","Estonian","Basque","Persian","Fulah","Finnish","Fijian","Faroese","French","Western Frisian","Irish","Gaelic","Galician","Guarani","Gujarati","Manx","Hausa","Hebrew","Hindi","Hiri Motu","Croatian","Haitian","Hungarian","Armenian","Herero","Interlingua","Indonesian","Interlingue","Igbo","Sichuan Yi","Inupiaq","Ido","Icelandic","Italian","Inuktitut","Japanese","Javanese","Georgian","Kongo","Kikuyu","Kuanyama","Kazakh","Kalaallisut","Central Khmer","Kannada","Korean","Kanuri","Kashmiri","Kurdish","Komi","Cornish","Kirghiz","Latin","Luxembourgish","Ganda","Limburgan","Lingala","Lao","Lithuanian","Luba-Katanga","Latvian","Malagasy","Marshallese","Maori","Macedonian","Malayalam","Mongolian","Marathi","Malay","Maltese","Burmese","Nauru","Norwegian Bokmal","Ndebele, North","Nepali","Ndonga","Dutch","Norwegian Nynorsk","Norwegian","Ndebele, South","Navajo","Chichewa","Occitan","Ojibwa","Oromo","Oriya","Ossetian","Panjabi","Pali","Polish","Pushto","Portuguese","Quechua","Romansh","Rundi","Romanian","Russian","Kinyarwanda","Sanskrit","Sardinian","Sindhi","Northern Sami","Sango","Sinhala","Slovak","Slovenian","Samoan","Shona","Somali","Albanian","Serbian","Swati","Sotho, Southern","Sundanese","Swedish","Swahili","Tamil","Telugu","Tajik","Thai","Tigrinya","Turkmen","Tagalog","Tswana","Tonga","Turkish","Tsonga","Tatar","Twi","Tahitian","Uighur","Ukrainian","Urdu","Uzbek","Venda","Vietnamese","Volapuk","Walloon","Wolof","Xhosa","Yiddish","Yoruba","Zhuang","Chinese","Zulu"];\
+            \
+            const mentors = db.mentors;\
+\
+            // --- DOM ELEMENTS ---\
+            const appContainer = document.getElementById('app');\
+            const countryFilter = document.getElementById('countryFilter');\
+            const languageFilter = document.getElementById('languageFilter');\
+            const destinationFilter = document.getElementById('destinationFilter');\
+            \
+            // --- TEMPLATES ---\
+            const mentorListTemplate = document.getElementById('mentor-list-template');\
+            const profilePageTemplate = document.getElementById('profile-page-template');\
+            \
+            // --- ROUTER & STATE ---\
+            const router = () => \{\
+                const path = window.location.hash.slice(1) || '/';\
+                const pathParts = path.split('/');\
+                appContainer.innerHTML = ''; // Clear the app container\
+\
+                if (pathParts[1] === 'profile' && pathParts[2]) \{\
+                    const mentorId = parseInt(pathParts[2], 10);\
+                    renderProfilePage(mentorId);\
+                    document.getElementById('filters').classList.add('hidden');\
+                \} else \{\
+                    renderMentorListPage();\
+                    document.getElementById('filters').classList.remove('hidden');\
+                \}\
+            \};\
+            \
+            // --- RENDER FUNCTIONS ---\
+            \
+            // Render Main Mentor List Page\
+            const renderMentorListPage = () => \{\
+                appContainer.appendChild(mentorListTemplate.content.cloneNode(true));\
+                populateFilters();\
+                applyFilters();\
+                 // Re-add event listeners since we are recreating the DOM\
+                countryFilter.addEventListener('change', applyFilters);\
+                languageFilter.addEventListener('change', applyFilters);\
+                destinationFilter.addEventListener('change', applyFilters);\
+            \}\
+\
+            // Render Mentor Cards on the main page\
+            const renderMentors = (mentorList) => \{\
+                const mentorGrid = appContainer.querySelector('#mentor-grid');\
+                const noResults = appContainer.querySelector('#no-results');\
+                const resultsHeading = appContainer.querySelector('#results-heading');\
+\
+                if (!mentorGrid || !noResults || !resultsHeading) return;\
+\
+                mentorGrid.innerHTML = ''; // Clear existing mentors\
+                if (mentorList.length === 0) \{\
+                    noResults.classList.remove('hidden');\
+                    resultsHeading.textContent = 'No Mentors Found';\
+                \} else \{\
+                    noResults.classList.add('hidden');\
+                    resultsHeading.textContent = `Showing $\{mentorList.length\} Mentors`;\
+                \}\
+\
+                mentorList.forEach(mentor => \{\
+                    const languagesHtml = mentor.languages.map(lang => `<span class="bg-gray-200 text-gray-700 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">$\{lang\}</span>`).join('');\
+\
+                    const mentorCard = document.createElement('div');\
+                    mentorCard.className = "bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 ease-in-out";\
+                    mentorCard.innerHTML = `\
+                        <div class="p-6">\
+                            <div class="flex flex-col items-center text-center">\
+                                <img class="w-24 h-24 rounded-full object-cover shadow-md mb-4" src="$\{mentor.img\}" alt="$\{mentor.name\}">\
+                                <h3 class="text-xl font-bold text-gray-900">$\{mentor.name\}</h3>\
+                                <p class="text-sm text-gray-500 mb-2">From $\{mentor.fromCountry\}</p>\
+                                <div class="mt-2 mb-4 flex flex-wrap justify-center items-center gap-1">\
+                                    $\{languagesHtml\}\
+                                </div>\
+                                <div class="w-full bg-gray-100 p-4 rounded-lg text-left mt-2">\
+                                    <p class="text-sm text-gray-800"><span class="font-semibold">Studying in:</span> $\{mentor.studyingIn\}</p>\
+                                    <p class="text-sm text-gray-800"><span class="font-semibold">University:</span> $\{mentor.university\}</p>\
+                                    <p class="text-sm text-gray-800"><span class="font-semibold">Major:</span> $\{mentor.major\}</p>\
+                                </div>\
+                                <button data-mentor-id="$\{mentor.id\}" class="connect-btn mt-4 w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300">Connect</button>\
+                            </div>\
+                        </div>\
+                    `;\
+                    mentorGrid.appendChild(mentorCard);\
+                \});\
+\
+                // Add event listeners to new connect buttons\
+                appContainer.querySelectorAll('.connect-btn').forEach(btn => \{\
+                    btn.addEventListener('click', (e) => \{\
+                        const mentorId = e.target.dataset.mentorId;\
+                        window.location.hash = `#/profile/$\{mentorId\}`;\
+                    \});\
+                \});\
+            \};\
+            \
+            // Render Profile Page\
+            const renderProfilePage = (mentorId) => \{\
+                const mentor = db.mentors.find(m => m.id === mentorId);\
+                if (!mentor) \{\
+                    window.location.hash = '#/';\
+                    return;\
+                \}\
+                appContainer.appendChild(profilePageTemplate.content.cloneNode(true));\
+                \
+                // Populate profile header\
+                document.getElementById('profile-img').src = mentor.img;\
+                document.getElementById('profile-name').textContent = mentor.name;\
+                document.getElementById('profile-from').textContent = `From $\{mentor.fromCountry\}`;\
+                document.getElementById('profile-study').textContent = `Studying $\{mentor.major\} at $\{mentor.university\}`;\
+                \
+                document.getElementById('back-to-mentors').addEventListener('click', () => window.location.hash = '#/');\
+\
+                setupTabs(mentor);\
+            \};\
+\
+            // Setup Profile Tabs\
+            const setupTabs = (mentor) => \{\
+                const tabsContainer = document.getElementById('profile-tabs');\
+                const tabContentContainer = document.getElementById('tab-content');\
+                const tabs = ['Chat', 'Schedule Lesson', 'Payments'];\
+                let activeTab = 'Chat';\
+\
+                const renderTabs = () => \{\
+                    tabsContainer.innerHTML = '';\
+                    tabs.forEach(tab => \{\
+                        const isActive = tab === activeTab;\
+                        const tabElement = document.createElement('button');\
+                        tabElement.textContent = tab;\
+                        tabElement.className = `whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm $\{isActive ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'\}`;\
+                        tabElement.addEventListener('click', () => \{\
+                            activeTab = tab;\
+                            renderTabs();\
+                            renderTabContent();\
+                        \});\
+                        tabsContainer.appendChild(tabElement);\
+                    \});\
+                \};\
+                \
+                const renderTabContent = () => \{\
+                    tabContentContainer.innerHTML = '';\
+                    switch (activeTab) \{\
+                        case 'Chat':\
+                            tabContentContainer.innerHTML = renderChatContent(mentor);\
+                            const chatMessages = tabContentContainer.querySelector('#chat-messages');\
+                            chatMessages.scrollTop = chatMessages.scrollHeight; // Auto-scroll to bottom\
+                            tabContentContainer.querySelector('#chat-form').addEventListener('submit', (e) => \{\
+                                e.preventDefault();\
+                                const input = e.target.elements.message;\
+                                if(input.value.trim())\{\
+                                    mentor.chatHistory.push(\{ sender: 'student', text: input.value \});\
+                                    input.value = '';\
+                                    renderTabContent();\
+                                \}\
+                            \});\
+                            break;\
+                        case 'Schedule Lesson':\
+                            tabContentContainer.innerHTML = renderScheduleContent(mentor);\
+                            // Add event listeners for booking\
+                            break;\
+                        case 'Payments':\
+                             tabContentContainer.innerHTML = renderPaymentsContent(mentor);\
+                            // Add event listeners for payments\
+                            break;\
+                    \}\
+                \};\
+\
+                renderTabs();\
+                renderTabContent();\
+            \};\
+\
+            const renderChatContent = (mentor) => \{\
+                const messagesHtml = mentor.chatHistory.map(msg => \{\
+                    const isMentor = msg.sender === 'mentor';\
+                    return `\
+                        <div class="flex $\{isMentor ? 'justify-start' : 'justify-end'\} mb-4">\
+                            <div class="$\{isMentor ? 'bg-gray-200 text-gray-800' : 'bg-blue-500 text-white'\} rounded-lg p-3 max-w-xs lg:max-w-md">\
+                                <p>$\{msg.text\}</p>\
+                            </div>\
+                        </div>\
+                    `;\
+                \}).join('');\
+\
+                return `\
+                    <div class="bg-white p-6 rounded-lg shadow-md">\
+                        <div id="chat-messages" class="h-96 overflow-y-auto mb-4 p-4 bg-gray-50 rounded-lg">\
+                           $\{messagesHtml\}\
+                        </div>\
+                        <form id="chat-form" class="flex gap-4">\
+                            <input name="message" type="text" placeholder="Type your message..." class="flex-grow p-3 border rounded-lg focus:ring-2 focus:ring-blue-500">\
+                            <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700">Send</button>\
+                        </form>\
+                    </div>\
+                `;\
+            \};\
+            \
+            const renderScheduleContent = (mentor) => \{\
+                // This is a simplified schedule view. A real app would use a calendar library.\
+                 return `\
+                    <div class="bg-white p-6 rounded-lg shadow-md">\
+                        <h3 class="text-xl font-bold mb-4">Book a Session with $\{mentor.name\}</h3>\
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">\
+                            <div class="p-4 border rounded-lg text-center cursor-pointer hover:bg-blue-50 hover:border-blue-400">\
+                                <p class="font-semibold">Oct 15, 2024</p>\
+                                <p class="text-sm text-gray-600">10:00 AM</p>\
+                                <span class="text-xs font-bold text-red-500">BOOKED</span>\
+                            </div>\
+                             <div class="p-4 border rounded-lg text-center cursor-pointer hover:bg-blue-50 hover:border-blue-400">\
+                                <p class="font-semibold">Oct 16, 2024</p>\
+                                <p class="text-sm text-gray-600">2:00 PM</p>\
+                                <button class="mt-2 text-xs bg-green-500 text-white font-bold py-1 px-3 rounded-full hover:bg-green-600">BOOK NOW</button>\
+                            </div>\
+                            <!-- More slots would be generated dynamically -->\
+                        </div>\
+                    </div>\
+                `;\
+            \};\
+\
+            const renderPaymentsContent = (mentor) => \{\
+                return `\
+                    <div class="bg-white p-6 rounded-lg shadow-md max-w-lg mx-auto">\
+                        <h3 class="text-xl font-bold mb-4">Send Payment to $\{mentor.name\}</h3>\
+                        <p class="text-sm text-gray-600 mb-6">Standard lesson rate: $25/hour.</p>\
+                        <form>\
+                            <div class="mb-4">\
+                                <label for="amount" class="block text-gray-700 mb-2">Amount ($)</label>\
+                                <input type="number" id="amount" value="25" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500">\
+                            </div>\
+                            <div class="mb-6">\
+                                <label for="message" class="block text-gray-700 mb-2">Message (Optional)</label>\
+                                <input type="text" id="message" placeholder="e.g., For our lesson on Oct 16" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500">\
+                            </div>\
+                            <button type="submit" class="w-full bg-green-600 text-white p-3 rounded-lg font-semibold hover:bg-green-700">Pay Securely</button>\
+                        </form>\
+                    </div>\
+                `;\
+            \};\
+\
+\
+            // Function to populate filter dropdowns\
+            const populateFilters = () => \{\
+                const destinations = [...new Set(mentors.map(m => m.studyingIn))].sort();\
+\
+                // Clear previous options except the first one\
+                countryFilter.length = 1;\
+                languageFilter.length = 1;\
+                destinationFilter.length = 1;\
+\
+                worldCountries.forEach(country => \{\
+                    countryFilter.innerHTML += `<option>$\{country\}</option>`;\
+                \});\
+                worldLanguages.forEach(language => \{\
+                    languageFilter.innerHTML += `<option>$\{language\}</option>`;\
+                \});\
+                destinations.forEach(destination => \{\
+                    destinationFilter.innerHTML += `<option>$\{destination\}</option>`;\
+                \});\
+            \};\
+\
+            // Function to filter mentors based on selection\
+            const applyFilters = () => \{\
+                const selectedCountry = countryFilter.value;\
+                const selectedLanguage = languageFilter.value;\
+                const selectedDestination = destinationFilter.value;\
+                \
+                const filteredMentors = mentors.filter(mentor => \{\
+                    const countryMatch = selectedCountry === 'All Countries' || mentor.fromCountry === selectedCountry;\
+                    const languageMatch = selectedLanguage === 'All Languages' || mentor.languages.includes(selectedLanguage);\
+                    const destinationMatch = selectedDestination === 'All Destinations' || mentor.studyingIn === selectedDestination;\
+                    \
+                    return countryMatch && languageMatch && destinationMatch;\
+                \});\
+\
+                renderMentors(filteredMentors);\
+            \};\
+\
+            // --- MODAL HANDLING ---\
+            const loginModal = document.getElementById('loginModal');\
+            const signupModal = document.getElementById('signupModal');\
+            const loginModalContent = document.getElementById('loginModalContent');\
+            const signupModalContent = document.getElementById('signupModalContent');\
+\
+            const openModal = (modal, content) => \{\
+                modal.classList.remove('hidden');\
+                setTimeout(() => \{\
+                    content.classList.remove('scale-95', 'opacity-0');\
+                    content.classList.add('scale-100', 'opacity-100');\
+                \}, 10);\
+            \}\
+            \
+            const closeModal = (modal, content) => \{\
+                content.classList.add('scale-95', 'opacity-0');\
+                content.classList.remove('scale-100', 'opacity-100');\
+                setTimeout(() => modal.classList.add('hidden'), 200);\
+            \}\
+\
+            document.getElementById('loginBtn').addEventListener('click', () => openModal(loginModal, loginModalContent));\
+            document.getElementById('signupBtn').addEventListener('click', () => openModal(signupModal, signupModalContent));\
+\
+            document.getElementById('closeLoginModal').addEventListener('click', () => closeModal(loginModal, loginModalContent));\
+            document.getElementById('closeSignupModal').addEventListener('click', () => closeModal(signupModal, signupModalContent));\
+            \
+            loginModal.addEventListener('click', (e) => \{\
+                if (e.target === loginModal) closeModal(loginModal, loginModalContent);\
+            \});\
+            signupModal.addEventListener('click', (e) => \{\
+                if (e.target === signupModal) closeModal(signupModal, signupModalContent);\
+            \});\
+\
+            // --- INITIALIZATION ---\
+            window.addEventListener('hashchange', router);\
+            router(); // Initial call to router\
+        \});\
+    </script>\
+</body>\
+</html>\
+\
+}
